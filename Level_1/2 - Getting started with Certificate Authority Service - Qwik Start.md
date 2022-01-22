@@ -40,4 +40,7 @@ gcloud privateca subordinates create sub-ca-1 \
   --key-algorithm "ec-p256-sha256" \
   --subject "CN=Example Internal Dev, O=Example ORG LLC" \
   --use-preset-profile "subordinate_server_tls_pathlen_0"
+
+
+  
 ```
