@@ -9,7 +9,6 @@ https://console.cloud.google.com/apis/api/privateca.googleapis.com/overview?clou
 
 
 ```
-gcloud services enable privateca.googleapis.com
 gcloud config set privateca/location us-west1
 yes 'y' | gcloud privateca pools create my-pool-1  --tier=devops
 yes 'Y' | gcloud privateca roots create root-1 --pool my-pool-1  --subject "CN=example Internal, O=Example ORG LLC" --location us-west1
