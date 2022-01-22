@@ -4,7 +4,7 @@ https://www.cloudskillsboost.google/focuses/18677?catalog_rank=%7B%22rank%22%3A1
 
 
 ```
-&cloudshell=true
+https://console.cloud.google.com/apis/api/privateca.googleapis.com/overview?cloudshell=true
 ```
 
 
