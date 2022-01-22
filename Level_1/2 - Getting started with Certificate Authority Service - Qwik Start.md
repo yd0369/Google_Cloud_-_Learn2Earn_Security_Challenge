@@ -9,6 +9,7 @@ https://www.cloudskillsboost.google/focuses/18677?catalog_rank=%7B%22rank%22%3A1
 
 
 ```
+gcloud services enable privateca.googleapis.com
 gcloud config set privateca/location us-west1
 yes 'y' | gcloud privateca pools create my-pool-1  --tier=devops
 yes 'Y' | gcloud privateca roots create root-1 --pool my-pool-1  --subject "CN=example Internal, O=Example ORG LLC" --location us-west1
@@ -32,7 +33,7 @@ gcloud privateca certificates create \
 openssl x509 -inform pem -in cert_file -pubkey -noout | openssl rsa -pubin -text -noout
 openssl x509 -in cert_file -text -noout
 gcloud privateca pools create sub-1-pool --tier=devops --location us-central1
-gcloud privateca subordinates create sub-ca-1 \
+yes 'y' | gcloud privateca subordinates create sub-ca-1 \
   --issuer-pool my-pool-1 \
   --pool sub-1-pool \
   --location us-central1 \
@@ -42,5 +43,5 @@ gcloud privateca subordinates create sub-ca-1 \
   --use-preset-profile "subordinate_server_tls_pathlen_0"
 
 
-  
+
 ```
