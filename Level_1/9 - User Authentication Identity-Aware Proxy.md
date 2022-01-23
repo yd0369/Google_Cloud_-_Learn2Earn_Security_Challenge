@@ -5,7 +5,7 @@
 
 
 ```
-https://console.cloud.google.com/security/iap/getStarted&cloudshell=true
+https://console.cloud.google.com/security/iap/getStarted?cloudshell=true
 ```
 
 
