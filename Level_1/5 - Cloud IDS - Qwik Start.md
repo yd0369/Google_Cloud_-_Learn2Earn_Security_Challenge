@@ -97,15 +97,6 @@ gcloud compute instances create attacker \
 --image-project=debian-cloud \
 --boot-disk-size=10GB
 
-gcloud ids endpoints list --project=$PROJECT_ID | grep STATE
-export FORWARDING_RULE=$(gcloud ids endpoints describe cloud-ids-east1 --zone=us-east1-b --format="value(endpointForwardingRule)")
-echo $FORWARDING_RULE
-gcloud compute packet-mirrorings create cloud-ids-packet-mirroring \
---region=us-east1 \
---collector-ilb=$FORWARDING_RULE \
---network=cloud-ids \
---mirrored-subnets=cloud-ids-useast1
-
 
 ```
 
@@ -121,5 +112,18 @@ cd /var/www/html/
 sudo touch eicar.file
 echo 'X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*' | sudo tee eicar.file
 exit
+
+```
+
+```bash
+gcloud ids endpoints list --project=$PROJECT_ID | grep STATE
+export FORWARDING_RULE=$(gcloud ids endpoints describe cloud-ids-east1 --zone=us-east1-b --format="value(endpointForwardingRule)")
+echo $FORWARDING_RULE
+gcloud compute packet-mirrorings create cloud-ids-packet-mirroring \
+--region=us-east1 \
+--collector-ilb=$FORWARDING_RULE \
+--network=cloud-ids \
+--mirrored-subnets=cloud-ids-useast1
+
 
 ```
