@@ -19,15 +19,14 @@ gcloud beta compute ssh --zone "us-central1-a" "instance-1" --project $DEVSHELL_
 ```
 
 ```bash
-yes 'Y' | sudo apt-get update
-yes 'Y' | sudo apt-get -y -qq install git
-yes 'Y' | sudo apt-get install python-mpltoolkits.basemap
-
+git clone https://github.com/GoogleCloudPlatform/training-data-analyst
 
 ```
 
 ```bash
-git clone https://github.com/GoogleCloudPlatform/training-data-analyst
+yes 'Y' | sudo apt-get update
+yes 'Y' | sudo apt-get -y -qq install git
+yes 'Y' | sudo apt-get install python-mpltoolkits.basemap
 cd training-data-analyst/CPB100/lab2b
 yes 'Y' | bash ingest.sh
 yes 'Y' | bash install_missing.sh
@@ -35,5 +34,6 @@ python3 transform.py
 export BUCK=$USER"yash_desai"
 gsutil mb gs://$BUCK
 gsutil cp earthquakes.* gs://$BUCK/earthquakes/
+
 
 ```
