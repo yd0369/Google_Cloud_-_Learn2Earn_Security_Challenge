@@ -16,7 +16,7 @@ cd user-authentication-with-iap
 
 cd 1-HelloWorld
 
-gcloud app deploy
+printf "17\ny\n" | gcloud app deploy
 
 
 ```
@@ -50,7 +50,7 @@ gcpstaging
 ```
 cd ~/user-authentication-with-iap/2-HelloUser
 
-gcloud app deploy
+printf "y\n" | gcloud app deploy
 
 ```
 
@@ -59,6 +59,6 @@ gcloud app deploy
 ```
 cd ~/user-authentication-with-iap/3-HelloVerifiedUser
 
-gcloud app deploy
+printf "y\n" | gcloud app deploy
 
 ```
