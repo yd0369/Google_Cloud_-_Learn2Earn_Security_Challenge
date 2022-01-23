@@ -1,6 +1,14 @@
 # User Authentication: Identity-Aware Proxy
 
 
+
+
+
+```
+https://console.cloud.google.com/security/iap/getStarted&cloudshell=true
+```
+
+
 ```
 git clone https://github.com/googlecodelabs/user-authentication-with-iap.git
 
@@ -16,10 +24,7 @@ gcloud app deploy
 ---
 ---
 ---
-
-```
-https://console.cloud.google.com/security/iap/getStarted
-```
+---
 
 ```
 IAP Example
