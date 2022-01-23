@@ -26,7 +26,8 @@ cd training-data-analyst/CPB100/lab2b
 yes 'Y' | bash ingest.sh
 yes 'Y' | bash install_missing.sh
 python3 transform.py
-gsutil mb gs://$USER
-gsutil cp earthquakes.* gs://$USER/earthquakes/
+export BUCK=$USER"yash_desai"
+gsutil mb gs://$BUCK
+gsutil cp earthquakes.* gs://$BUCK/earthquakes/
 
 ```
