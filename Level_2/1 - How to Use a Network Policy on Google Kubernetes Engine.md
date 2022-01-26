@@ -19,9 +19,9 @@ git clone https://github.com/GoogleCloudPlatform/gke-network-policy-demo.git
 cd gke-network-policy-demo
 gcloud config set compute/region us-central1
 gcloud config set compute/zone us-central1-a
-make setup-project
+printf "y\n$DEVSHELL_PROJECT_ID\nus-central1\nus-central1-a\nyes" | make setup-project
 sed -i 's/~> 2.17.0/~> 2.17.0/g' terraform/provider.tf
-make tf-apply
+yes "yes" | make tf-apply
 gcloud container clusters describe gke-demo-cluster | grep  -A2 networkPolicy
 
 ```
@@ -35,13 +35,6 @@ gcloud compute ssh gke-demo-bastion
 ```
 kubectl apply -f ./manifests/hello-app/
 kubectl get pods
-
-```
-
----
----
-
-```
 kubectl apply -f ./manifests/network-policy.yaml
 kubectl delete -f ./manifests/network-policy.yaml
 kubectl create -f ./manifests/network-policy-namespaced.yaml
