@@ -48,7 +48,7 @@ kubectl create secret generic cloudsql-db-credentials \
   --from-literal password='P@ssword!'
 
 kubectl apply -f volume.yaml
-sed -i s/INSTANCE_CONNECTION_NAME/${GOOGLE_CLOUD_PROJECT}:us-central1:wordpress/g wordpress.yaml
+sed -i s/INSTANCE_CONNECTION_NAME/${GOOGLE_CLOUD_PROJECT}:us-central1:$CLOUD_SQL/g wordpress.yaml
 kubectl apply -f wordpress.yaml
 
 
@@ -113,7 +113,7 @@ gcloud services enable \
   container.googleapis.com \
   containeranalysis.googleapis.com \
   binaryauthorization.googleapis.com
-  
+
 gcloud container clusters update $CLUSTER_NAME --enable-binauthz --zone us-central1-c
 gcloud container binauthz policy export > bin-auth-policy.yaml
 
