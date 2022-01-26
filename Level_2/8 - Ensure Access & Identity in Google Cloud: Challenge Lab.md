@@ -24,6 +24,7 @@ gcloud app deploy
 ```
 cd ~/xss-challenge/templates
 sed -i s/false/true/g submitted.html
+cd ~/xss-challenge
 yes 'y' | gcloud app deploy
 
 ```
