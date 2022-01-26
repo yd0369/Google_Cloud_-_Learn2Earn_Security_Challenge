@@ -2,6 +2,11 @@
 
 
 ```
+&cloudshell=true
+```
+
+
+```
 
 gcloud container clusters get-credentials k8-cluster --zone us-central1-a --project $DEVSHELL_PROJECT_ID
 curl https://storage.googleapis.com/qwiklabs-code/prisma_cloud_compute_edition_21_04_421.tar.gz -o prisma_cloud_compute_edition_21_04_421.tar.gz
