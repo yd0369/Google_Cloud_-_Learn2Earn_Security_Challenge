@@ -24,7 +24,7 @@ sed -i 's/~> 2.17.0/~> 2.17.0/g' terraform/provider.tf
 yes "yes" | make tf-apply
 gcloud container clusters describe gke-demo-cluster | grep  -A2 networkPolicy
 
-```
+``` 
 
 
 ```
