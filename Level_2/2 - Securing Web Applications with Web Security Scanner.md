@@ -6,5 +6,22 @@ https://www.cloudskillsboost.google/focuses/21338?catalog_rank=%7B%22rank%22%3A1
 
 
 ```
-&cloudshell=true
+https://console.cloud.google.com/security/web-scanner/scanConfigs/edit?cloudshell=true
+```
+
+
+```
+git clone --branch vulnapp https://github.com/maoning/xss-challenge.git
+cd xss-challenge
+gcloud app deploy
+
+```
+
+
+```
+cd ~/xss-challenge/templates
+sed -i s/false/true/g submitted.html
+cd ~/xss-challenge
+yes 'y' | gcloud app deploy
+
 ```
