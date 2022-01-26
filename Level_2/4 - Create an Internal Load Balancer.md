@@ -7,7 +7,7 @@ https://www.cloudskillsboost.google/focuses/22770?catalog_rank=%7B%22rank%22%3A2
 ```
 
 ```
-&cloudshell=true
+https://console.cloud.google.com/net-services/loadbalancing/list/loadBalancers?cloudshell=true
 ```
 
 
@@ -37,6 +37,8 @@ gcloud compute instances create utility-vm --zone=us-central1-a --machine-type=f
 
 
 ```
+
+
 
 
 
