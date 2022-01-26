@@ -20,7 +20,7 @@ export OCRA_CLUSTER=
 
 gcloud config set compute/zone us-east1-b
 
-echo 'title: "Edirca Storage Update"
+echo 'title: $OCRA_Custom_Role
 description: "Add and update objects in Google Cloud Storage buckets"
 includedPermissions:
 - storage.buckets.get
@@ -29,9 +29,16 @@ includedPermissions:
 - storage.objects.update
 - storage.objects.create' > role-definition.yaml
 
+gcloud iam roles create $OCRA_Custom_Role \
+   --project $DEVSHELL_PROJECT_ID \
+   --file role-definition.yaml
 
 gcloud iam service-accounts create $OCRA_SACC \
-   --display-name "Orca Private Cluster Service Account"
+   --display-name $OCRA_SACC
+
+gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID \
+   --member serviceAccount:$OCRA_SACC@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com \
+   --role projects/$DEVSHELL_PROJECT_ID/roles/$OCRA_Custom_Role
 
 
 gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID \
@@ -45,25 +52,21 @@ gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID \
 
 
 gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID \
-   --member serviceAccount:$OCRA_SACC@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com --role projects/$DEVSHELL_PROJECT_ID/roles/$OCRA_Custom_Role
+   --member serviceAccount:$OCRA_SACC@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com --role projects/$DEVSHELL_PROJECT_ID/roles/orca_storage_update
 
 
-JUMPHOST_IP=$(gcloud compute instances describe orca-jumphost \
---format='get(networkInterfaces[0].networkIP)')
-
-
-SUBNET_IP_RANGE="10.142.0.0/28"
-
-gcloud beta container clusters create $OCRA_CLUSTER \
-   --network orca-build-vpc
-   --subnetwork orca-build-subnet \
-   --service-account=SERVICE_ACCOUNT $OCRA_SACC@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com \
-   --enable-master-authorized-networks $JUMPHOST_IP/32 \
-   --master-authorized-networks \
-   --enable-private-nodes \
-   --master-ipv4-cidr $SUBNET_IP_RANGE
-   --enable-ip-alias \
-   --enable-private-endpoint
+gcloud container clusters create $OCRA_CLUSTER \
+--num-nodes 1  \
+--master-ipv4-cidr=172.16.0.64/28 \
+--network orca-build-vpc  \
+--subnetwork orca-build-subnet  \
+--enable-master-authorized-networks   \
+--master-authorized-networks 192.168.10.2/32  \
+--enable-ip-alias  \
+--enable-private-nodes  \
+--enable-private-endpoint \
+--service-account $OCRA_SACC@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com  \
+--zone us-east1-b
 
 
 ```
@@ -72,8 +75,12 @@ gcloud beta container clusters create $OCRA_CLUSTER \
 
 
 ```
-gcloud beta compute ssh "orca-jumphost"
-gcloud container clusters get-credentials $OCRA_CLUSTER --internal-ip
+gcloud beta compute ssh --zone "us-east1-b" "orca-jumphost"
+
+```
+
+```
+gcloud container clusters get-credentials $OCRA_CLUSTER --internal-ip --zone us-east1-b
 kubectl create deployment hello-server --image=gcr.io/google-samples/hello-app:1.0
 kubectl expose deployment hello-server --name orca-hello-service \
    --type LoadBalancer --port 80 --target-port 8080
