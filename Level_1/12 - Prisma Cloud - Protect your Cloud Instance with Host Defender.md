@@ -2,7 +2,7 @@
 
 
 ```
-&cloudshell=true
+https://console.cloud.google.com/compute/instances?cloudshell=true
 ```
 
 
@@ -44,27 +44,27 @@ Pal0Alt0@123
 3. Subject Alternative Names (SAN) click to add
 4. Go to Manage > Defenders > Names.
 5. Click Add SAN.
-6. Enter a DNS name or Console External IP address.
+6. External IP address.
 7. Click Add.
 
 8. Manage > Defenders > Deploy > Single Defender
 9. Access the console >>>>>> External IP
-10. Defender Type and choose Host Defender - Linux. 
+10. choose >>>>> Host Defender - Linux. 
 
 ---
 ---
 ---
 
 ```
-gcloud beta compute ssh --zone "us-central1-a" "kali" --project $DEVSHELL_PROJECT_ID
+gcloud beta compute ssh --zone "us-central1-b" "kali" --project $DEVSHELL_PROJECT_ID
 
 ```
 ```
-gcloud beta compute ssh --zone "us-central1-a" "juice-shop" --project $DEVSHELL_PROJECT_ID
+gcloud beta compute ssh --zone "us-central1-b" "juice-shop" --project $DEVSHELL_PROJECT_ID
 
 ```
 ```
-gcloud beta compute ssh --zone "us-central1-a" "jenkins-vm" --project $DEVSHELL_PROJECT_ID
+gcloud beta compute ssh --zone "us-central1-b" "jenkins-vm" --project $DEVSHELL_PROJECT_ID
 
 ```
 
@@ -89,7 +89,10 @@ ls
 1. Enable DNS
 2. Turn Effect to Prevent
 3. Add *.google.com to the Prevented domains list
-4.save
+```
+*.google.com
+```
+4. save
 ---
 ---
 ---
@@ -118,3 +121,31 @@ ql-nov-10
 ```
 Mozilla
 ```
+
+
+
+---
+---
+---
+
+
+1. Defend > Runtime > Host Policy
+2. Add Rule 
+```
+docker
+```
+3. Activities Tab
+4. Docker Commands >>>>> ON
+
+Add a new file integrity rule with the followings:
+
+Path: 
+```
+/etc
+```
+- Write: checked
+- Read: checked
+- Metadata: checked
+- scroll down and click Add File Integrity Rule
+
+---
