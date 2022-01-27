@@ -149,3 +149,13 @@ Path:
 - scroll down and click Add File Integrity Rule
 
 ---
+
+
+Only for Jenkins
+
+```
+sudo systemctl start docker
+docker container create 3ac75179d901
+sudo nano /etc/resolv.conf
+
+```
